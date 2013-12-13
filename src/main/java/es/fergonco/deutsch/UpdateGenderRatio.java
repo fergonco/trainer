@@ -5,12 +5,13 @@ import java.io.IOException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.fergonco.deutsch.jpa.Word;
+import es.fergonco.deutsch.jpa.WordStatus;
 
 public class UpdateGenderRatio extends HttpServlet {
 
@@ -19,6 +20,10 @@ public class UpdateGenderRatio extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String user = req.getParameter("user");
+		if (user == null) {
+			throw new StatusException(401, "User parameter is mandatory");
+		}
 		String result = req.getParameter("result");
 		boolean improve;
 		if ("good".equals(result)) {
@@ -34,14 +39,17 @@ public class UpdateGenderRatio extends HttpServlet {
 		EntityManager em = factory.createEntityManager();
 		em.getTransaction().begin();
 		String wordName = req.getParameter("word");
-		Word word = (Word) em.find(Word.class, wordName);
-		double ratio = word.getGuessGenderFailureRate();
+		TypedQuery<WordStatus> query = em.createQuery(
+				"SELECT w FROM WordStatus w WHERE w.word='" + wordName
+						+ "' AND w.user='" + user + "';", WordStatus.class);
+		WordStatus wordStatus = query.getSingleResult();
+		double ratio = wordStatus.getGuessGenderFailureRate();
 		if (improve) {
-			ratio = ratio + 0.1;
+			ratio = ratio + 1;
 		} else {
-			ratio = ratio / 2;
+			ratio = ratio - 3;
 		}
-		word.setGuessGenderFailureRate(ratio);
+		wordStatus.setGuessGenderFailureRate(ratio);
 		em.getTransaction().commit();
 	}
 }
