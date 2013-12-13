@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +28,9 @@ public class GetNoun extends HttpServlet {
 				.createEntityManagerFactory("deploy");
 		EntityManager em = factory.createEntityManager();
 		// read the existing entries and write to console
-		Query q = em.createQuery(
+		TypedQuery<Word> q = em.createQuery(
 				"select w from Word w "
-						+ "order by w.guessGenderFailureRate asc")
+						+ "order by w.guessGenderFailureRate asc", Word.class)
 				.setMaxResults(20);
 		List<Word> words = q.getResultList();
 		int idx = new Random().nextInt(words.size());
