@@ -29,8 +29,8 @@ public class GetNoun extends HttpServlet {
 		EntityManager em = factory.createEntityManager();
 		// read the existing entries and write to console
 		TypedQuery<Word> q = em.createQuery(
-				"select w from Word w "
-						+ "order by w.guessGenderFailureRate asc", Word.class)
+				"SELECT w FROM Word w, WordStatus ws WHERE ws.word=w "
+						+ "order by ws.guessGenderFailureRate asc", Word.class)
 				.setMaxResults(10);
 		List<Word> words = q.getResultList();
 		int idx = new Random().nextInt(words.size());
