@@ -31,7 +31,7 @@ public class GetNoun extends HttpServlet {
 		TypedQuery<Word> q = em.createQuery(
 				"select w from Word w "
 						+ "order by w.guessGenderFailureRate asc", Word.class)
-				.setMaxResults(20);
+				.setMaxResults(10);
 		List<Word> words = q.getResultList();
 		int idx = new Random().nextInt(words.size());
 		Word random = words.get(idx);
