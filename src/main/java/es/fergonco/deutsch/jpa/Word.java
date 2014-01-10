@@ -16,6 +16,9 @@ public class Word {
 	private String definition;
 	private String translation;
 	private boolean substantive;
+	private double guessGenderFailureRate = 0.1;
+	private double guessFromSpanish = 0.1;
+	private double guessFromDeutch = 0.1;
 
 	public Word() {
 	}
@@ -66,6 +69,30 @@ public class Word {
 
 	public void setSubstantive(boolean substantive) {
 		this.substantive = substantive;
+	}
+
+	public double getGuessGenderFailureRate() {
+		return guessGenderFailureRate;
+	}
+
+	public void setGuessGenderFailureRate(double guessGenderFailureRate) {
+		this.guessGenderFailureRate = guessGenderFailureRate;
+	}
+
+	public double getGuessFromSpanish() {
+		return guessFromSpanish;
+	}
+
+	public void setGuessFromSpanish(double guessFromSpanish) {
+		this.guessFromSpanish = guessFromSpanish;
+	}
+
+	public double getGuessFromDeutch() {
+		return guessFromDeutch;
+	}
+
+	public void setGuessFromDeutch(double guessFromDeutch) {
+		this.guessFromDeutch = guessFromDeutch;
 	}
 
 	@Override
