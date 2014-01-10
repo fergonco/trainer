@@ -6,10 +6,10 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>es.fergonco.deutsch.jpa.Word</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://fergonco.es/ddb39509" />
-			<property name="javax.persistence.jdbc.user" value="ddb39509" />
-			<property name="javax.persistence.jdbc.password" value="Fergonco0" />
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/words" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
 
 			<!-- Vendor specific -->
 			<property name="eclipselink.ddl-generation" value="create-tables" />
