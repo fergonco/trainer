@@ -1,6 +1,6 @@
 define([ "jquery", "message-bus", "gender-question-factory" ], function($, bus, genderQuestionFactory) {
 
-	var div = $("<div/>");
+	var div = $("<div/>").addClass("exercise");
 	$("body").append(div);
 
 	var update = function(noun, result) {
@@ -15,7 +15,7 @@ define([ "jquery", "message-bus", "gender-question-factory" ], function($, bus, 
 		bus.send("ajax", {
 			url : "get-noun",
 			success : function(data, textStatus, jqXHR) {
-				div.empty().html(data.translation);
+				div.empty();
 				genderQuestionFactory.newQuestion(div, data);
 			},
 			errorMsg : "Could not obtain the questions from the server"

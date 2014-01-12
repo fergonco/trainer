@@ -19,16 +19,16 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 
 	return {
 		newQuestion : function(div, noun) {
-			var template = "<table>" + //
-			"<tr><td><button id='der'>der</button></td><td></td></tr>" + //
-			"<tr><td><button id='die'>die</button></td><td>{{noun}}</td></tr>" + //
-			"<tr><td><button id='das'>das</button></td><td></td></tr>" + //
-			"<tr><td></td><td><button id='unknown'>No sé</button></td></tr>" + //
-			"</table>";
-			var table = mustache.render(template, {
-				noun : noun.name
+			var template = "<div class='question'><b>{{noun}}</b>:&nbsp;{{translation}}</div>" + //
+			"<button id='der'>der</button>" + //
+			"<button id='die'>die</button>" + //
+			"<button id='das'>das</button>" + //
+			"<button id='unknown'>No sé</button>";
+			var content = mustache.render(template, {
+				noun : noun.name,
+				translation: noun.translation
 			});
-			div.append(table);
+			div.append(content);
 			$("#der").click(function() {
 				check(noun, "masculin");
 			});
