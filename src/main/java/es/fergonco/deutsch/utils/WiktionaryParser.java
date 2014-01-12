@@ -1,9 +1,12 @@
 package es.fergonco.deutsch.utils;
 
+import es.fergonco.deutsch.jpa.Gender;
+import es.fergonco.deutsch.jpa.Word;
+import geomatico.xpath.XPathableText;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.persistence.EntityManager;
@@ -12,17 +15,16 @@ import javax.persistence.Persistence;
 
 import org.apache.commons.io.IOUtils;
 
-import es.fergonco.deutsch.jpa.Gender;
-import es.fergonco.deutsch.jpa.Word;
-import geomatico.xpath.XPathableText;
-
 public class WiktionaryParser {
 
 	public static void main(String[] args) throws Exception {
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory("deploy");
+		EntityManager em = factory.createEntityManager();
+
 		InputStream input = WiktionaryParser.class
 				.getResourceAsStream("/words.txt");
 		Scanner scanner = new Scanner(input);
-		ArrayList<Word> words = new ArrayList<Word>();
 		int count = 0;
 		while (scanner.hasNext() && count < 555555) {
 			String german = scanner.nextLine();
@@ -70,19 +72,13 @@ public class WiktionaryParser {
 				word.setTranslation(spanish);
 				word.setGender(Gender.parseByArticle(gender));
 				word.setSubstantive("Substantive".equals(substantive));
-				words.add(word);
+				em.getTransaction().begin();
+				em.persist(word);
+				em.getTransaction().commit();
 			}
 
 			count++;
 		}
-		EntityManagerFactory factory = Persistence
-				.createEntityManagerFactory("deploy");
-		EntityManager em = factory.createEntityManager();
-		em.getTransaction().begin();
-		for (Word word : words) {
-			em.persist(word);
-		}
-		em.getTransaction().commit();
 		em.close();
 	}
 
