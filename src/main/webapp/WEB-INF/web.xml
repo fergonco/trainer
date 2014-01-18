@@ -15,12 +15,30 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>get-word</servlet-name>
+		<servlet-class>es.fergonco.deutsch.GetWord</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>get-word</servlet-name>
+		<url-pattern>/get-word</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>update-gender-ratio</servlet-name>
 		<servlet-class>es.fergonco.deutsch.UpdateGenderRatio</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>update-gender-ratio</servlet-name>
 		<url-pattern>/update-gender-ratio</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>update-in-german-ratio</servlet-name>
+		<servlet-class>es.fergonco.deutsch.UpdateInGermanRatio</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>update-in-german-ratio</servlet-name>
+		<url-pattern>/update-in-german-ratio</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

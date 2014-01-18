@@ -17,7 +17,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import es.fergonco.deutsch.jpa.Word;
 
-public class GetNoun extends HttpServlet {
+public class GetWord extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,9 +29,8 @@ public class GetNoun extends HttpServlet {
 		EntityManager em = factory.createEntityManager();
 		// read the existing entries and write to console
 		TypedQuery<Word> q = em.createQuery(
-				"select w from Word w where w.substantive=true "
-						+ "order by w.guessGenderFailureRate asc", Word.class)
-				.setMaxResults(10);
+				"select w from Word w " + "order by w.guessFromSpanish asc",
+				Word.class).setMaxResults(10);
 		List<Word> words = q.getResultList();
 		int idx = new Random().nextInt(words.size());
 		Word random = words.get(idx);
