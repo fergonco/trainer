@@ -64,14 +64,16 @@ public class WiktionaryParser {
 						"/xml/sectionlist/section/entry[1]/"
 								+ "side[@lang='de']/words/word")
 						.substring(0, 4);
-				String substantive = xText
-						.evaluate("/xml/sectionlist/section/@sctTitle");
+				boolean substantive = "Substantive".equals(xText
+						.evaluate("/xml/sectionlist/section/@sctTitle"));
 
 				Word word = new Word();
 				word.setName(german);
 				word.setTranslation(spanish);
-				word.setGender(Gender.parseByArticle(gender));
-				word.setSubstantive("Substantive".equals(substantive));
+				if (substantive) {
+					word.setGender(Gender.parseByArticle(gender));
+				}
+				word.setSubstantive(substantive);
 				em.getTransaction().begin();
 				em.persist(word);
 				em.getTransaction().commit();
