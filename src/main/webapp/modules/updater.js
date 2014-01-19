@@ -1,4 +1,4 @@
-require([ "message-bus", "test-in-german", "test-gender" ], function(bus) {
+require([ "message-bus" ], function(bus) {
 
 	var divUpdate = $(//
 	"<div class='exercise'>" + //

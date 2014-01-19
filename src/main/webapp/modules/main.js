@@ -9,7 +9,8 @@ require.config({
 	}
 });
 
-require([ "message-bus", "error-management", "communication", "test-gender", "test-in-german", "updater" ], function(bus) {
+require([ "message-bus", "error-management", "communication", // "test-gender",
+"test-in-german", "updater", "batch-load" ], function(bus) {
 	bus.send("new-question");
 	bus.send("new-in-german-question");
 });
