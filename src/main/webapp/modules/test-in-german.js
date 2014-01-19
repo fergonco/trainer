@@ -40,6 +40,7 @@ define([ "jquery", "message-bus", "in-german-question-factory" ], function($, bu
 		} else {
 			alert("mal: " + word.name);
 		}
+		bus.send("new-word", word);
 		bus.send("new-in-german-question");
 		update(word, "bad");
 	});
