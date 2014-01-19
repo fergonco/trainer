@@ -6,11 +6,20 @@
 	border-width: 1px;
 }
 
-.exercise button {
+.exercise-button {
 	width: 100%;
+}
+
+.edit-button {
+	float: right;
 }
 
 .question {
 	width: auto;
 	margin: 10px;
+}
+
+#word-string {
+	width: 100%;
+	border-width: 0px;
 }

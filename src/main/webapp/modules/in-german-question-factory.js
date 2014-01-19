@@ -32,7 +32,8 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 
 	return {
 		newQuestion : function(div, word) {
-			var template = "<div class='question'><b>{{translation}}</b></div>" + //
+			var template = "<div class='question'><b>{{translation}}</b>" + //
+			"<button id='in-german-change-word' class='edit-button'>Editar</button></div>" + //
 			"<input id='in_german' type='text' size='25' />";
 			var content = mustache.render(template, {
 				translation : word.translation
@@ -43,6 +44,9 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 				if (e.keyCode == 13) {
 					check(word, inGermanInput.val());
 				}
+			});
+			$("#in-german-change-word").click(function() {
+				bus.send("new-word", word);
 			});
 		}
 	};

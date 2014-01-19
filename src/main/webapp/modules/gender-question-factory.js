@@ -19,14 +19,15 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 
 	return {
 		newQuestion : function(div, noun) {
-			var template = "<div class='question'><b>{{noun}}</b>:&nbsp;{{translation}}</div>" + //
-			"<button id='der'>der</button>" + //
-			"<button id='die'>die</button>" + //
-			"<button id='das'>das</button>" + //
-			"<button id='unknown'>No sé</button>";
+			var template = "<div class='question'><b>{{noun}}</b>:&nbsp;{{translation}}" + //
+			"<button id='gender-change-word' class='edit-button'>Editar</button></div>" + //
+			"<button id='der' class='exercise-button'>der</button>" + //
+			"<button id='die' class='exercise-button'>die</button>" + //
+			"<button id='das' class='exercise-button'>das</button>" + //
+			"<button id='unknown' class='exercise-button'>No sé</button>";
 			var content = mustache.render(template, {
 				noun : noun.name,
-				translation: noun.translation
+				translation : noun.translation
 			});
 			div.append(content);
 			$("#der").click(function() {
@@ -41,6 +42,9 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 			$("#unknown").click(function() {
 				alert(getArticle(noun.gender) + " " + noun.name);
 				bus.send("bad-gender", noun);
+			});
+			$("#gender-change-word").click(function() {
+				bus.send("new-word", noun);
 			});
 		}
 	};

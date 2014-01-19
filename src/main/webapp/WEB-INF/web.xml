@@ -42,6 +42,15 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>update-word</servlet-name>
+		<servlet-class>es.fergonco.deutsch.UpdateWord</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>update-word</servlet-name>
+		<url-pattern>/update-word</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>error-servlet</servlet-name>
 		<servlet-class>es.fergonco.deutsch.ErrorServlet</servlet-class>
 	</servlet>
