@@ -40,6 +40,7 @@ define([ "jquery", "message-bus", "mustache" ], function($, bus, mustache) {
 			});
 			div.append(content);
 			var inGermanInput = $("#in_german");
+			inGermanInput.focus();
 			inGermanInput.keydown(function(e) {
 				if (e.keyCode == 13) {
 					check(word, inGermanInput.val());
