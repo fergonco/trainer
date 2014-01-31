@@ -37,7 +37,7 @@ public class UpdateInGermanRatio extends HttpServlet {
 		Word word = (Word) em.find(Word.class, wordName);
 		double ratio = word.getGuessFromSpanish();
 		if (improve) {
-			ratio = ratio + 0.1;
+			ratio = ratio + 1;
 		} else {
 			ratio = ratio / 2;
 		}
