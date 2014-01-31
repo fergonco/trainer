@@ -30,7 +30,7 @@ public class GetWord extends HttpServlet {
 		// read the existing entries and write to console
 		TypedQuery<Word> q = em.createQuery(
 				"select w from Word w " + "order by w.guessFromSpanish asc",
-				Word.class).setMaxResults(10);
+				Word.class).setMaxResults(100);
 		List<Word> words = q.getResultList();
 		int idx = new Random().nextInt(words.size());
 		Word random = words.get(idx);
